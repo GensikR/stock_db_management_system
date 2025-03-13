@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Information</title>
+</head>
+<body>
+    <h1>Portfolio Information</h1>
+
+    <h2>1. Find the total value of dividends received by each portfolio.</h2>
+    <button onclick="total_div_portfolio()">Total Dividends</button>
+    <p id="total_div_results"></p>
+
+    <script>
+        function total_div_portfolio() {
+                    fetch('/total_div_portfolio')
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('total_div_results').innerText = data;
+                        });
+                }
+      </script>
+
+    <h2>2. Find the total value of each portfolio based on the current stock prices.</h2>
+    <button onclick="total_Portfolio_val()">Total Portfolio Value</button>
+    <p id="portofolios_vals_result"></p>
+
+    <script>
+        function total_Portfolio_val() {
+                    fetch('/total_Portfolio_val')
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('portofolios_vals_result').innerText = data;
+                        });
+                }
+      </script>
+
+    <h2>3. Find the total value of all portfolios.</h2>
+    <button onclick="total_all_portfolios()">Total All Portfolios</button>
+    <p id="all_portfolio_result"></p>
+
+    <script>
+        function total_all_portfolios() {
+                    fetch('/total_all_portfolios')
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('all_portfolio_result').innerText = data;
+                        });
+                }
+      </script>
+
+    <h2>4. Retrieve the total transaction value for each portfolio, filters out portfolios with total transaction value less than:</h2>
+    <button onclick="total_portfolio_trans_val()">Total Transaction Value</button>
+    <p id="trans_val_result"></p>
+
+    <script>
+        function total_portfolio_trans_val() {
+          fetch(`/total_portfolio_trans_val`)
+            .then(response => response.text())
+            .then(data => {
+              document.getElementById('trans_val_result').innerText = data;
+            });
+        }
+      </script>
+
+   
+</body>
+</html>

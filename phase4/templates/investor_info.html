@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Information</title>
+</head>
+<body>
+    <h1>Investor Information</h1>
+
+    <h2>1. Retrieve the total investment value of each investor.</h2>
+    <button onclick="total_investment_val()">Total Investment Value</button>
+    <p id="total_investment_result"></p>
+
+    <script>
+      function total_investment_val() {
+                  fetch('/total_investment_val')
+                      .then(response => response.text())
+                      .then(data => {
+                          document.getElementById('total_investment_result').innerText = data;
+                      });
+              }
+    </script>
+
+    <h2>2. Retrieve the total value of dividends received by each investor.</h2>
+
+    <button onclick="investors_total_div()">Total Dividends Received</button>
+    <p id="total_div_received_result"></p>
+
+    <script>
+      function investors_total_div() {
+                  fetch('/investors_total_div')
+                      .then(response => response.text())
+                      .then(data => {
+                          document.getElementById('total_div_received_result').innerText = data;
+                      });
+              }
+    </script>
+
+    <h2>3. Retrieve the names of investors with a total investment value greater than a specified amount.</h2>
+    <input type="number" id="investment_thres" placeholder="Enter investment threshold">
+    <button onclick="investors_with_greater_investment()">Investors With Greater Investment</button>
+    <p id="investors_with_greater_investment_result"></p>
+
+    <script>
+      function investors_with_greater_investment() {
+        const threshold = document.getElementById('investment_thres').value;
+        fetch(`/investors_with_greater_investment?threshold=${threshold}`)
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('investors_with_greater_investment_result').innerText = data;
+          });
+      }
+    </script>
+
+
+
+  <h2>4. Retrieve the names of investors who have received dividends greater than a specified amount.</h2>
+  <input type="number" id="dividend_thres" placeholder="Enter dividend threshold">
+  <button onclick="investors_more_divs()">Investors With Greater Dividends</button>
+  <p id="investors_more_divs_result"></p>
+
+  <script>
+    function investors_more_divs() {
+      const threshold = document.getElementById('dividend_thres').value;
+      fetch(`/investors_more_divs?threshold=${threshold}`)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('investors_more_divs_result').innerText = data;
+        });
+    }
+  </script>
+
+
+
+    
+
+</body>
+</html>

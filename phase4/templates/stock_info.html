@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Information</title>
+</head>
+<body>
+    <h1>Stock Information</h1>
+
+    <h2>1. Retrieve all stocks, and their information</h2>
+    <button onclick="get_all_stock_info()">Retrieve All Stocks Info</button>
+    <p id="all_stock_result"></p>
+
+    <script>
+        function get_all_stock_info() {
+          fetch(`/get_all_stock_info`)
+            .then(response => response.text())
+            .then(data => {
+              document.getElementById('all_stock_result').innerText = data;
+            });
+        }
+      </script>
+
+    <h2>2. Retrieve the current price of a stock and all portfolios with that specific stock.</h2>
+    <p>Stock Symbol: <input type="text" id="stock_symbol"></p>
+    <button onclick="get_curr_price()">Retrieve Current Price</button>
+    <p id="stock_curr_price_result"></p>
+
+    <script>
+        function get_curr_price() {
+          const stock_symbol = document.getElementById('stock_symbol').value;
+          fetch(`/get_curr_price?stock_symbol=${stock_symbol}`)
+            .then(response => response.text())
+            .then(data => {
+              document.getElementById('stock_curr_price_result').innerText = data;
+            });
+        }
+      </script>
+
+    <h2>3. Find top 10 Stocks, ranked by price</h2>
+    <button onclick="get_top10_stocks()">Find Highest Performing Stocks</button>
+    <p id="top10_stocks_result"></p>
+
+    <script>
+        function get_top10_stocks() {
+                    fetch('/get_top10_stocks')
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById('top10_stocks_result').innerText = data;
+                        });
+                }
+      </script>
+
+<button onclick="go_back_index()">Return to Index</button>
+<script>
+  function go_back_index() {
+              fetch('/')
+          }
+</script>
+
+</body>
+</html>
